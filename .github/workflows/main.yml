@@ -1,0 +1,51 @@
+name: CI Pipeline
+
+on:
+  pull_request:
+    branches:
+      - '**'  # This will trigger the workflow for any branch that receives a pull request
+
+jobs:
+  build:
+    name: Build and Test
+    runs-on: self-hosted
+    
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.head_ref }}  # Checks out the branch of the pull request
+          
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: Install Dependencies
+        run: |
+          cd server
+          npm install
+          cd ../client
+          npm install
+
+      - name: Run Backend Tests
+        run: |
+          cd server
+          npm run test
+
+      - name: Run Frontend Tests
+        run: |
+          cd ../client
+          npm test
+
+      - name: Lint Code
+        run: |
+          cd server
+          npx eslint . --ext .ts,.js
+          cd ../client
+          npx eslint . --ext .js,.jsx,.ts,.tsx
+          
+      - name: Build Frontend
+        run: |
+          cd client
+          npm run build
