@@ -24,7 +24,7 @@ jobs:
       - name: Install Dependencies
         run: |
           npm install
-          cd ../client
+          cd client
           npm install
 
       - name: Run Backend Tests
@@ -33,14 +33,13 @@ jobs:
 
       - name: Run Frontend Tests
         run: |
-          cd ../client
+          cd client
           npm test
 
       - name: Lint Code
         run: |
-          cd server
           npx eslint . --ext .ts,.js
-          cd ../client
+          cd client
           npx eslint . --ext .js,.jsx,.ts,.tsx
           
       - name: Build Frontend
