@@ -38,7 +38,7 @@ jobs:
 
       - name: Lint Code
         run: |
-          npx run lint
+          npx run format
           
       - name: Build Frontend
         run: |

@@ -1,5 +1,5 @@
-import * as dotenv from "dotenv";
-import { Octokit } from "octokit";
+import * as dotenv from 'dotenv';
+import { Octokit } from 'octokit';
 
 dotenv.config();
 
@@ -26,7 +26,12 @@ class GitHubClient {
     return data;
   }
 
-  async updateIssue(issueNumber: number, title?: string, body?: string, state?: 'open' | 'closed') {
+  async updateIssue(
+    issueNumber: number,
+    title?: string,
+    body?: string,
+    state?: 'open' | 'closed',
+  ) {
     const { data } = await this.octokit.issues.update({
       owner: this.owner,
       repo: this.repo,
