@@ -38,9 +38,7 @@ jobs:
 
       - name: Lint Code
         run: |
-          npx eslint . --ext .ts,.js
-          cd client
-          npx eslint . --ext .js,.jsx,.ts,.tsx
+          npx run format
           
       - name: Build Frontend
         run: |
